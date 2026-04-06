@@ -36,7 +36,8 @@ export default {
         const data = await response.json()
         this.events = data.filter(event => event.hidden !== "1").map(event => ({
           ...event,
-          title: event.title.replace('.', '.@'),
+          title: event.title,
+//            .replace('.', '.@'),
           subtitle: event.subtitle
         }))
       } catch (error) {
