@@ -201,11 +201,11 @@ html {
   .daily_columns {
     display: none;
   }
-  ul > li:nth-child(odd) {
+  /* ul > li:nth-child(odd) {
     background-color: white !important;
   }
 
   ul > li:nth-child(even) {
     background-color: #d9dada !important;
-  }
+  } */
 }
