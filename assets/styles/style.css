@@ -9,7 +9,7 @@ p {
 .table_wrap {
   padding: 60px 20px 40px;
   width: 3800px;
-  height: 1700px;
+  /* height: 1700px; */
 }
 /* header */
 .table_head {
@@ -107,7 +107,7 @@ ul {
   grid-template-columns: repeat(3, 1fr);
   grid-auto-flow: column;
   max-width: 3800px;
-  height: 1430px;
+  /* height: 1430px; */
   margin-top: 10px;
   padding-left: 0px;
 }
