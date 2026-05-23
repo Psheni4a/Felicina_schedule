@@ -32,216 +32,84 @@ export default {
   methods: {
     async loadEvents() {
       try {
-//        const response = await fetch('https://api.sheetbest.com/sheets/8d0203ba-cf19-4af2-8a57-9105573d5f58')
-//        const data = await response.json()
-                const data = 
-                 [
-  {
-    "dateISO": "19.05.2026",
-    "time": "13:00",
-    "title": "«Музейные сокровища»",
-    "subtitle": "Игра-путешествие по музею",
-    "hidden": false
-  },
-  {
-    "dateISO": "19.05.2026",
-    "time": "15:00",
-    "title": "«Золото сарматов: Искусство древних мастеров»",
-    "subtitle": "Бесплатная тематическая экскурсия по входному билету",
-    "hidden": false
-  },
-  {
-    "dateISO": "20.05.2026",
-    "time": "12:00",
-    "title": "«От храма к храму»",
-    "subtitle": "Пешеходная экскурсия, 12+",
-    "hidden": false
-  },
-  {
-    "dateISO": "20.05.2026",
-    "time": "15:00",
-    "title": "«Золото сарматов: Искусство древних мастеров»",
-    "subtitle": "Бесплатная тематическая экскурсия по входному билету",
-    "hidden": false
-  },
-  {
-    "dateISO": "20.05.2026",
-    "time": "15:00",
-    "title": "«Чудеса в решете: роспись деревянного изделия. Кубанский пейзаж»",
-    "subtitle": "Творческий мастер-класс",
-    "hidden": false
-  },
-  {
-    "dateISO": "20.05.2026",
-    "time": "16:00",
-    "title": "«Подвиги древних героев»",
-    "subtitle": "Экскурсия-спектакль",
-    "hidden": false
-  },
-  {
-    "dateISO": "21.05.2026",
-    "time": "11:00",
-    "title": "«Чудеса в решете: роспись деревянного изделия. Кубанский пейзаж»",
-    "subtitle": "Творческий мастер-класс",
-    "hidden": false
-  },
-  {
-    "dateISO": "21.05.2026",
-    "time": "13:00",
-    "title": "«Музейные сокровища»",
-    "subtitle": "Игра-путешествие по музею",
-    "hidden": false
-  },
-  {
-    "dateISO": "21.05.2026",
-    "time": "15:00",
-    "title": "«Золото сарматов: Искусство древних мастеров»",
-    "subtitle": "Бесплатная тематическая экскурсия по входному билету",
-    "hidden": false
-  },
-  {
-    "dateISO": "21.05.2026",
-    "time": "15:00",
-    "title": "«Чудеса в решете: роспись деревянного изделия. Кубанский пейзаж»",
-    "subtitle": "Творческий мастер-класс",
-    "hidden": false
-  },
-  {
-    "dateISO": "21.05.2026",
-    "time": "16:00",
-    "title": "«Прорыв»",
-    "subtitle": "Экскурсия–спектакль",
-    "hidden": false
-  },
-  {
-    "dateISO": "22.05.2026",
-    "time": "11:00",
-    "title": "«Чудеса в решете: роспись деревянного изделия. Кубанский пейзаж»",
-    "subtitle": "Творческий мастер-класс",
-    "hidden": false
-  },
-  {
-    "dateISO": "22.05.2026",
-    "time": "12:00",
-    "title": "«Екатеринодар - град казачий: краснодарская улица Красная»",
-    "subtitle": "Пешеходная экскурсия, 12+",
-    "hidden": false
-  },
-  {
-    "dateISO": "22.05.2026",
-    "time": "12:00",
-    "title": "«Славянская письменность: наследие и традиции»",
-    "subtitle": "Мероприятие ко Дню славянской письменности",
-    "hidden": false
-  },
-  {
-    "dateISO": "22.05.2026",
-    "time": "13:00",
-    "title": "«Музейные сокровища»",
-    "subtitle": "Игра-путешествие по музею",
-    "hidden": false
-  },
-  {
-    "dateISO": "22.05.2026",
-    "time": "13:00",
-    "title": "Торжественное награждение участников Конкурса чтецов «Победители»",
-    "subtitle": "",
-    "hidden": false
-  },
-  {
-    "dateISO": "22.05.2026",
-    "time": "15:00",
-    "title": "«Золото сарматов: Искусство древних мастеров»",
-    "subtitle": "Бесплатная тематическая экскурсия по входному билету",
-    "hidden": false
-  },
-  {
-    "dateISO": "22.05.2026",
-    "time": "15:00",
-    "title": "«Чудеса в решете: роспись деревянного изделия. Кубанский пейзаж»",
-    "subtitle": "Творческий мастер-класс",
-    "hidden": false
-  },
-  {
-    "dateISO": "23.05.2026",
-    "time": "13:00",
-    "title": "«Земля богов с загадками и головоломками»",
-    "subtitle": "Интерактивная программа для детей",
-    "hidden": false
-  },
-  {
-    "dateISO": "23.05.2026",
-    "time": "13:00",
-    "title": "«Изящная эпоха рококо», 16+",
-    "subtitle": "Интерактивное мероприятие с мастер-классом. Виньетка с розой и дегустацией чая из лепестков роз",
-    "hidden": false
-  },
-  {
-    "dateISO": "23.05.2026",
-    "time": "15:00",
-    "title": "«Золото сарматов: Искусство древних мастеров»",
-    "subtitle": "Бесплатная тематическая экскурсия по входному билету",
-    "hidden": false
-  },
-  {
-    "dateISO": "23.05.2026",
-    "time": "15:00",
-    "title": "«Богомолы-насекомые с другой планеты»",
-    "subtitle": "Авторская экскурсия",
-    "hidden": false
-  },
-  {
-    "dateISO": "23.05.2026",
-    "time": "16:00",
-    "title": "«Открытое кормление ящериц и богомолов»",
-    "subtitle": "По входному билету на выставку",
-    "hidden": false
-  },
-  {
-    "dateISO": "24.05.2026",
-    "time": "11:00",
-    "title": "«Чудеса в решете: роспись деревянного изделия. Кубанский пейзаж»",
-    "subtitle": "Творческий мастер-класс",
-    "hidden": false
-  },
-  {
-    "dateISO": "24.05.2026",
-    "time": "11:00",
-    "title": "«Восток - тело тонкое»",
-    "subtitle": "Интерактивное мероприятие о змеях и народах",
-    "hidden": false
-  },
-  {
-    "dateISO": "24.05.2026",
-    "time": "11:00",
-    "title": "«Краснодарская улица Красная: этноэкскурсия»",
-    "subtitle": "Пешеходная экскурсия, 12+",
-    "hidden": false
-  },
-  {
-    "dateISO": "24.05.2026",
-    "time": "15:00",
-    "title": "«Золото сарматов: Искусство древних мастеров»",
-    "subtitle": "Бесплатная тематическая экскурсия по входному билету",
-    "hidden": false
-  },
-  {
-    "dateISO": "24.05.2026",
-    "time": "15:00",
-    "title": "«Чудеса в решете: роспись деревянного изделия. Кубанский пейзаж»",
-    "subtitle": "Творческий мастер-класс",
-    "hidden": false
-  }
-]
-        this.events = data.filter(event => event.hidden !== "1").map(event => ({
-          ...event,
-          title: event.title,
-//            .replace('.', '.@'),
-          subtitle: event.subtitle
-        }))
+        const sheetId = '1s41VA87rQ_1kecpIxGRmQ3Q2wegeGdXOyCLXy3tnfew'
+        const sheetUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv`
+        const response = await fetch(sheetUrl)
+
+        if (!response.ok) {
+          throw new Error(`Google Sheet request failed: ${response.status} ${response.statusText}`)
+        }
+
+        const csvText = await response.text()
+        const data = this.parseCsv(csvText)
+
+        this.events = data
+          .filter(event => event.hidden !== '1')
+          .map(event => ({
+            ...event,
+            title: event.title,
+            subtitle: event.subtitle
+          }))
       } catch (error) {
         console.error('Failed to load events:', error)
       }
+    },
+    parseCsv(csvText) {
+      const text = csvText.replace(/^\uFEFF/, '').replace(/\r\n/g, '\n').replace(/\r/g, '\n')
+      const rows = []
+      let current = ''
+      let row = []
+      let inQuote = false
+
+      for (let i = 0; i < text.length; i++) {
+        const char = text[i]
+        const nextChar = text[i + 1]
+
+        if (inQuote) {
+          if (char === '"') {
+            if (nextChar === '"') {
+              current += '"'
+              i += 1
+            } else {
+              inQuote = false
+            }
+          } else {
+            current += char
+          }
+        } else {
+          if (char === '"') {
+            inQuote = true
+          } else if (char === ',') {
+            row.push(current)
+            current = ''
+          } else if (char === '\n') {
+            row.push(current)
+            rows.push(row)
+            row = []
+            current = ''
+          } else {
+            current += char
+          }
+        }
+      }
+
+      if (current !== '' || row.length > 0) {
+        row.push(current)
+        rows.push(row)
+      }
+
+      if (rows.length === 0) {
+        return []
+      }
+
+      const header = rows[0].map(cell => cell.trim())
+      return rows.slice(1).map(rowData => {
+        const item = {}
+        header.forEach((column, index) => {
+          item[column] = (rowData[index] || '').trim()
+        })
+        return item
+      })
     },
     getRowColor(index) {
       const row = index % this.rows
@@ -275,8 +143,7 @@ export default {
         </div>
         <div class="header_item peshie">
           <span>пешеходные экскурсии</span><br />
-          по будням: 14:00, 15:00,<br />
-          суббота: 11:00, воскресенье: 15:00
+          по будням и выходным
         </div>
         <div class="header_item">
           <img class="pushkin" src="/assets/images/pushkin.png" alt="" />
