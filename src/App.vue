@@ -11,11 +11,13 @@ export default {
   },
   data() {
     return {
-      events: []
+      events: [],
+      fontSize: 23
     }
   },
   async mounted() {
     await this.loadEvents()
+    this.applyFontSize()
   },
   computed: {
     rows() {
@@ -115,6 +117,9 @@ export default {
       const row = index % this.rows
       return row % 2 === 0 ? 'white' : '#d9dada'
     },
+    applyFontSize() {
+      document.documentElement.style.fontSize = `${this.fontSize}px`
+    },
     async takeScreenshot() {
       try {
         const canvas = await html2canvas(document.querySelector('.table_wrap'))
@@ -167,14 +172,35 @@ export default {
         ></li>
       </ul>
     </div>
-    <button @click="takeScreenshot">Скриншот</button>
+    <div class="control_panel">
+      <button @click="takeScreenshot">Скриншот</button>
+      <label class="font_control">
+        <input
+          type="number"
+          min="12"
+          max="32"
+          step="1"
+          v-model.number="fontSize"
+          @input="applyFontSize"
+        />
+        <span>Шрифт</span>
+      </label>
+    </div>
   </template>
 
 <style scoped>
-button {
+.control_panel {
   position: fixed;
   top: 20px;
   left: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  z-index: 1000;
+}
+
+.control_panel button, .control_panel .font_control{
   width: 80px;
   height: 80px;
   padding: 0;
@@ -182,7 +208,7 @@ button {
   color: transparent;
   border: none;
   border-radius: 8px;
-  font-size: 2rem;
+  font-size: 23px;
   font-weight: bold;
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -193,12 +219,46 @@ button {
   justify-content: center;
 }
 
-button:hover {
+.control_panel:hover button, .control_panel:hover .font_control{
   opacity: 1;
   color: white;
   background-color: #8a1f22;
   transform: scale(1.05);
-  width: 20rem;
+  width: 400px;
+}
+
+.control_panel:hover button {
   padding: 1rem 2rem;
+}
+
+.control_panel:hover .font_control input {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.font_control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 12px;
+  background-color: #a2282b;
+  border-radius: 8px;
+  color: white;
+  font-size: 1rem;
+  height: 80px;
+}
+
+.font_control input {
+  width: 70px;
+  height: 48px;
+  border-radius: 8px;
+  border: none;
+  padding: 0 10px;
+  text-align: center;
+  opacity: 0;
+}
+
+.font_control input:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.8);
 }
 </style>
