@@ -153,7 +153,7 @@ export default {
         <div class="header_item">
           <img class="pushkin" src="/assets/images/pushkin.png" alt="" />
           <img class="buildings" src="/assets/images/buildings.png" alt="" />
-          <p class="zapis">ЗАПИСЬ ПО ТЕЛЕФОНУ:<br />8 (861) 267-16-21<br />8 (918) 411-83-07<br />8 (861)-262-40-86</p>
+          <p class="zapis">ЗАПИСЬ ПО ТЕЛЕФОНУ:<br />8 (861) 267-16-21<br />8 (918) 411-83-07<br />8 (861) 262-40-86</p>
         </div>
       </div>
       <ul :style="{ gridTemplateRows: gridRows }">
