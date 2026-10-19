@@ -2,22 +2,40 @@
 
 import Event from '../components/event.vue'
 import Month from '../components/month.vue'
+import PlanImport from '../components/planImport.vue'
 import html2canvas from 'html2canvas'
 
 export default {
   components: {
     Event,
-    Month
+    Month,
+    PlanImport
   },
   data() {
     return {
       events: [],
-      fontSize: 23
+      sheetRows: [],
+      sheetEvents: [],
+      showImport: false,
+      previewing: false,
+      fontSize: 23,
+      fit: true,
+      fitScale: 1,
+      posterSize: { width: 0, height: 0 }
     }
   },
   async mounted() {
+    // Афиша свёрстана под ширину 3800px: на экране показываем её уменьшенной,
+    // а скриншот снимаем с полного размера, поэтому качество не теряется.
+    this.resizeObserver = new ResizeObserver(() => this.updateFit())
+    this.resizeObserver.observe(this.$refs.poster)
+    window.addEventListener('resize', this.updateFit)
     await this.loadEvents()
     this.applyFontSize()
+  },
+  beforeUnmount() {
+    this.resizeObserver.disconnect()
+    window.removeEventListener('resize', this.updateFit)
   },
   computed: {
     rows() {
@@ -25,6 +43,16 @@ export default {
     },
     gridRows() {
       return `repeat(${this.rows}, 1fr)`
+    },
+    stageStyle() {
+      return {
+        width: `${this.posterSize.width * this.fitScale}px`,
+        height: `${this.posterSize.height * this.fitScale}px`,
+        overflow: 'hidden'
+      }
+    },
+    posterStyle() {
+      return this.fitScale === 1 ? {} : { transform: `scale(${this.fitScale})`, transformOrigin: '0 0' }
     },
     blankEvents() {
       const remainder = this.events.length % 3
@@ -44,6 +72,7 @@ export default {
 
         const csvText = await response.text()
         const data = this.parseCsv(csvText)
+        this.sheetRows = data
 
         this.events = data
           .filter(event => event.hidden !== '1')
@@ -117,12 +146,42 @@ export default {
       const row = index % this.rows
       return row % 2 === 0 ? 'white' : '#d9dada'
     },
+    previewWeek(rows) {
+      if (!this.previewing) this.sheetEvents = this.events
+      this.events = rows.map(row => ({ ...row }))
+      this.previewing = true
+      this.showImport = false
+    },
+    backToPlan() {
+      this.events = this.sheetEvents
+      this.previewing = false
+      this.showImport = true
+    },
+    updateFit() {
+      const el = this.$refs.poster
+      if (!el) return
+      this.posterSize = { width: el.offsetWidth, height: el.offsetHeight }
+      this.fitScale = this.fit ? Math.min(1, (document.documentElement.clientWidth - 16) / el.offsetWidth) : 1
+    },
+    toggleFit() {
+      this.fit = !this.fit
+      this.updateFit()
+    },
     applyFontSize() {
       document.documentElement.style.fontSize = `${this.fontSize}px`
     },
     async takeScreenshot() {
       try {
-        const canvas = await html2canvas(document.querySelector('.table_wrap'))
+        const el = this.$refs.poster
+        const canvas = await html2canvas(el, {
+          width: el.offsetWidth,
+          height: el.offsetHeight,
+          onclone: doc => {
+            const poster = doc.querySelector('.table_wrap')
+            poster.style.transform = 'none'
+            Object.assign(poster.parentElement.style, { width: 'auto', height: 'auto', overflow: 'visible' })
+          }
+        })
         const link = document.createElement('a')
         link.download = 'screenshot.png'
         link.href = canvas.toDataURL()
@@ -137,7 +196,8 @@ export default {
 </script>
 
 <template>
-      <div class="table_wrap">
+    <div class="stage" :style="stageStyle">
+      <div class="table_wrap" ref="poster" :style="posterStyle">
       <div class="table_head">
         <div class="header_item">
           <div class="">
@@ -159,7 +219,7 @@ export default {
       <ul :style="{ gridTemplateRows: gridRows }">
         <event
           v-for="(event, index) in events"
-          :key="event.title"
+          :key="`${event.dateISO}-${event.time}-${index}`"
           :event="event"
           :index="index"
           :row-count="rows"
@@ -172,8 +232,12 @@ export default {
         ></li>
       </ul>
     </div>
+    </div>
     <div class="control_panel">
       <button @click="takeScreenshot">Скриншот</button>
+      <button @click="toggleFit">{{ fit ? 'Полный размер' : 'Вписать в окно' }}</button>
+      <button v-if="previewing" @click="backToPlan">Назад к плану</button>
+      <button v-else @click="showImport = true">План недели</button>
       <label class="font_control">
         <input
           type="number"
@@ -186,6 +250,12 @@ export default {
         <span>Шрифт</span>
       </label>
     </div>
+    <PlanImport
+      v-show="showImport"
+      :sheet-rows="sheetRows"
+      @close="showImport = false"
+      @preview="previewWeek"
+    />
   </template>
 
 <style scoped>
